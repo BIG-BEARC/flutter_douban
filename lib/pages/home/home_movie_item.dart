@@ -72,7 +72,9 @@ class DBHomeMovieItem extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           buildContentInfoTitle(),
-          SizedBox(height: 8,),
+          SizedBox(
+            height: 8,
+          ),
           buildContentInfoRate(),
           SizedBox(
             height: 8,
@@ -93,6 +95,14 @@ class DBHomeMovieItem extends StatelessWidget {
           ),
           baseline: TextBaseline.ideographic,
           alignment: PlaceholderAlignment.middle),
+      ...movieItem.title.runes.map((rune) {
+        return WidgetSpan(
+            child: Text(
+              new String.fromCharCode(rune),
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
+            alignment: PlaceholderAlignment.middle);
+      }).toList(),
       WidgetSpan(
           child: Text(
             movieItem.title,
@@ -108,17 +118,22 @@ class DBHomeMovieItem extends StatelessWidget {
   Widget buildContentInfoRate() {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 3),
-      child: Row(
-        children: [
-          StartRatingWidget(rating: movieItem.rating,size: 20,),
-          SizedBox(
-            width: 6,
-          ),
-          Text(
-            "${movieItem.rating}",
-            style: TextStyle(fontSize: 16),
-          )
-        ],
+      child: FittedBox(
+        child: Row(
+          children: [
+            StartRatingWidget(
+              rating: movieItem.rating,
+              size: 20,
+            ),
+            SizedBox(
+              width: 6,
+            ),
+            Text(
+              "${movieItem.rating}",
+              style: TextStyle(fontSize: 16),
+            )
+          ],
+        ),
       ),
     );
   }
@@ -139,6 +154,7 @@ class DBHomeMovieItem extends StatelessWidget {
       ),
     );
   }
+
   Widget buildContentLine() {
     return Container(
       height: 100,
@@ -151,6 +167,7 @@ class DBHomeMovieItem extends StatelessWidget {
       ),
     );
   }
+
   Widget buildContentWish() {
     return Container(
       height: 100,
@@ -161,9 +178,7 @@ class DBHomeMovieItem extends StatelessWidget {
           Text(
             "想看",
             style: TextStyle(
-                fontSize: 18,
-                color: Color.fromARGB(255, 235, 170, 60)
-            ),
+                fontSize: 18, color: Color.fromARGB(255, 235, 170, 60)),
           )
         ],
       ),
@@ -184,5 +199,16 @@ class DBHomeMovieItem extends StatelessWidget {
         style: TextStyle(fontSize: 20, color: Color(0xff666666)),
       ),
     );
+  }
+
+  List<InlineSpan> buildContentInfoTitleWidgetSpanList() {
+    return movieItem.title.runes
+        .map((rune) => WidgetSpan(
+            child: Text(
+              new String.fromCharCode(rune),
+              style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold),
+            ),
+            alignment: PlaceholderAlignment.middle))
+        .toList();
   }
 }

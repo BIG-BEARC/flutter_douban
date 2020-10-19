@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 class DBSubjectContent extends StatefulWidget {
   @override
   _DBSubjectContentState createState() => _DBSubjectContentState();
@@ -7,6 +8,8 @@ class DBSubjectContent extends StatefulWidget {
 class _DBSubjectContentState extends State<DBSubjectContent> {
   @override
   Widget build(BuildContext context) {
-    return Center(child: Text('书影音'),);
+    return Center(
+      child: Text('书影音'),
+    );
   }
 }
